@@ -1,0 +1,28 @@
+name: Build node js app
+
+on: 
+  push: 
+   branches: [main]
+
+
+jobs:
+  build:
+   runs-on: ubuntu-latest
+
+   concurrency: 
+    group: depoly
+    cancel-in-progress: true
+
+   steps:
+     - name: checkout repository
+       uses: actions/checkout@v6.0.2
+       
+     - name: install dependencies
+       run: npm install
+
+     - name: build nodejs app
+       run: npm run build 
+
+     - name: depoly
+       run: echo "depoly"
+     
